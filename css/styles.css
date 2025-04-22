@@ -2947,7 +2947,7 @@ img.u-pull-left {
 .mobile-home-link a,
 .main-nav a {
     display             : block;
-    font-size           : 10px;
+    font-size           : 14px;
     font-weight         : 400;
     line-height         : var(--header-height);
     text-transform      : uppercase;
