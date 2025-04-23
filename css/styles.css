@@ -3790,6 +3790,7 @@ img.u-pull-left {
 
 .modal-popup__desc {
     padding : 0 var(--vspace-1_25) var(--vspace-0_25);
+    position: relative;
 }
 
 .modal-popup__cat {
@@ -3829,20 +3830,19 @@ img.u-pull-left {
     display : none;
 }
 
-.modal-popup__details {
+.links-container {
+    position         : absolute;
+    top              : -20px;
+    right            : 10px;
+}
+.links-container .modal-popup__details {
+    margin-right: 10px;
     background-color : rgba(0, 0, 0, 0.3);
     font-size        : var(--text-xs);
     line-height      : var(--vspace-1_25);
     color            : white;
-    padding          : 0 1.2rem;
-    position         : absolute;
-    top              : var(--vspace-1);
-    left             : var(--vspace-1);
+    padding          : 1.2rem;
 }
-.modal-popup__details_add {
-    left             : var(--vspace-5);
-}
-
 .modal-popup__details:focus,
 .modal-popup__details:hover {
     background-color : var(--color-body);
