@@ -3241,6 +3241,22 @@ img.u-pull-left {
     position: relative;
 }
 
+/* --- Particle Canvas --- */
+#particle-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.s-intro .intro-content {
+    position: relative;
+    z-index: 1;
+}
+
 .intro-content {
     min-height: calc(25.5 * var(--space));
     justify-content: center;
@@ -3249,9 +3265,74 @@ img.u-pull-left {
     padding-bottom: var(--vspace-3);
 }
 
+/* --- Animated Gradient Hero Title --- */
 .intro-content .text-huge-title {
     font-size: calc(var(--text-huge) * var(--text-huge-multiplier));
     padding-right: 5vw;
+    background: linear-gradient(90deg,
+            #ffffff 0%,
+            #a78bfa 15%,
+            #818cf8 30%,
+            #60a5fa 45%,
+            #34d399 60%,
+            #a78bfa 75%,
+            #ffffff 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient-shift 6s linear infinite;
+}
+
+@keyframes gradient-shift {
+    0% {
+        background-position: 0% center;
+    }
+
+    100% {
+        background-position: 200% center;
+    }
+}
+
+/* --- 3D Tilt on Project Cards --- */
+.folio-list__item-link {
+    transform-style: preserve-3d;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.5s, border-color 0.4s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.folio-list__item-link:hover {
+    border-color: rgba(129, 140, 248, 0.35);
+}
+
+.folio-list__item {
+    perspective: 800px;
+}
+
+/* Shine overlay for project cards */
+.folio-list__item-link::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(105deg,
+            transparent 40%,
+            rgba(255, 255, 255, 0.03) 45%,
+            rgba(255, 255, 255, 0.06) 50%,
+            rgba(255, 255, 255, 0.03) 55%,
+            transparent 60%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 3;
+}
+
+.folio-list__item-link:hover::after {
+    opacity: 1;
 }
 
 /* --------------------------------------------------------------------
@@ -3503,6 +3584,15 @@ img.u-pull-left {
 
 .about-expertise .skills-list li:not(:last-child)::after {
     content: ", ";
+}
+
+/* Mobile adjustments for marquee alignment */
+@media screen and (max-width: 800px) {
+    .about-expertise {
+        padding-left: 0;
+        padding-right: 0;
+        margin-left: 6vw;
+    }
 }
 
 /* --- Tech Stack Marquee Container --- */
@@ -3993,7 +4083,6 @@ img.u-pull-left {
 }
 
 .folio-list__item-text::before {
-    content: "";
     display: block;
     width: 0;
     height: 1px;
@@ -4576,6 +4665,144 @@ img.u-pull-left {
 
 .timeline__skills {
     margin-bottom: 20px;
+}
+
+/* ===================================================================
+ * ENHANCEMENT: Custom Animated Cursor
+ * ------------------------------------------------------------------- */
+.cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 8px;
+    height: 8px;
+    background: #a78bfa;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99999;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease, background 0.3s ease, opacity 0.3s ease;
+    mix-blend-mode: difference;
+}
+
+.cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid rgba(167, 139, 250, 0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99998;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;
+}
+
+/* Grow cursor on interactive elements */
+.cursor-dot.cursor-hover {
+    width: 40px;
+    height: 40px;
+    background: rgba(167, 139, 250, 0.15);
+    mix-blend-mode: normal;
+}
+
+.cursor-ring.cursor-hover {
+    width: 60px;
+    height: 60px;
+    border-color: rgba(167, 139, 250, 0.3);
+}
+
+/* Hide custom cursor on touch devices + mobile */
+@media (hover: none),
+(max-width: 900px) {
+
+    .cursor-dot,
+    .cursor-ring {
+        display: none !important;
+    }
+}
+
+/* ===================================================================
+ * ENHANCEMENT: Magnetic Button Effect
+ * ------------------------------------------------------------------- */
+.btn--magnetic {
+    position: relative;
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ===================================================================
+ * ENHANCEMENT: Glowing Section Dividers
+ * ------------------------------------------------------------------- */
+.section-divider {
+    position: relative;
+    width: 100%;
+    height: 1px;
+    margin: 0;
+    border: none;
+    overflow: visible;
+}
+
+.section-divider::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(99, 102, 241, 0.3) 15%,
+            rgba(167, 139, 250, 0.6) 50%,
+            rgba(99, 102, 241, 0.3) 85%,
+            transparent 100%);
+    transition: width 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.section-divider.divider-visible::before {
+    width: 80%;
+}
+
+.section-divider::after {
+    content: "";
+    position: absolute;
+    top: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 9px;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(99, 102, 241, 0) 15%,
+            rgba(167, 139, 250, 0.12) 50%,
+            rgba(99, 102, 241, 0) 85%,
+            transparent 100%);
+    filter: blur(4px);
+    transition: width 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s;
+}
+
+.section-divider.divider-visible::after {
+    width: 60%;
+}
+
+/* ===================================================================
+ * ENHANCEMENT: Scroll-Triggered Text Reveal
+ * ------------------------------------------------------------------- */
+.text-reveal-word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(40px);
+    filter: blur(8px);
+    transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        filter 0.7s ease;
+}
+
+.text-reveal-word.revealed {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
 }
 
 .modal-popup img {
