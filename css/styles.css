@@ -4409,6 +4409,117 @@ img.u-pull-left {
 }
 
 
+/* ===================================================================
+ * # MOBILE UI FIXES
+ *
+ *
+ * ------------------------------------------------------------------- */
+
+/* 1. Stack Chips Spacing */
+.skill-chip {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    background: rgba(0, 0, 0, 0.05);
+    /* Light background for visibility */
+    padding: 0.2rem 0.5rem;
+    border-radius: 1rem;
+}
+
+.skill-chip img {
+    margin-right: 0.3rem;
+    width: 1.2rem;
+    height: 1.2rem;
+    object-fit: contain;
+}
+
+/* 2. Close Button Visibility */
+.basicLightbox::after {
+    background-color: rgba(0, 0, 0, 0.6);
+    /* Dark background for contrast */
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    width: 2.5rem;
+    /* Slightly larger touch target */
+    height: 2.5rem;
+    background-size: 1.2rem;
+    /* Adjust icon size inside circle */
+}
+
+/* 3. Link Buttons Overlapping Title */
+@media screen and (max-width: 600px) {
+    .links-container {
+        position: static;
+        /* Remove absolute positioning */
+        margin-bottom: 1rem;
+        display: block;
+        text-align: right;
+        /* Keep them to the right */
+    }
+
+    .modal-popup h5 {
+        margin-top: 0;
+        /* Reset margin since links are now above */
+        padding-top: 0;
+    }
+
+    .modal-popup__desc {
+        padding-top: 1.5rem;
+        /* Add some padding to the top of description container */
+    }
+}
+
+/* Round 2 Fixes */
+
+/* 4. Scrollable Modal on Mobile */
+@media screen and (max-width: 600px) {
+    .modal-popup {
+        max-height: 80vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .modal-popup img {
+        flex-shrink: 0;
+        max-height: 30vh;
+        object-fit: cover;
+    }
+
+    .modal-popup__desc {
+        overflow-y: auto;
+        max-height: 50vh;
+        padding-bottom: 2rem;
+    }
+}
+
+/* 5. Force Visible Close Button */
+.basicLightbox::after {
+    content: "\00d7";
+    /* Unicode multiplication sign (X) */
+    font-size: 2.5rem;
+    line-height: 2.5rem;
+    text-align: center;
+    color: white;
+    background: rgba(0, 0, 0, 0.7);
+    /* Dark background */
+    background-image: none !important;
+    /* Override SVG if present */
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    width: 2.5rem;
+    height: 2.5rem;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10000;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
 
 /* ===================================================================
  * # CONTACT
